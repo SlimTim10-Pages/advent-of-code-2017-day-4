@@ -7,27 +7,23 @@ import Prelude
 
 main :: Fay ()
 main = do
-  addWindowEvent "load" run
+  addWindowEvent "load" load
 
-run :: Fay ()
-run = do
+load :: Fay ()
+load = do
   part1Button <- getElementById "part1"
   part2Button <- getElementById "part2"
-  addEventListener part1Button "click" part1
-  addEventListener part2Button "click" part2
+  addEventListener part1Button "click" (run validPassphrases)
+  addEventListener part2Button "click" (run validPassphrases2)
 
-part1 :: Fay ()
-part1 = do
+run :: ([String] -> Int) -> Fay ()
+run checker = do
   inputNode <- select "#input"
   outputNode <- select "#output"
   input <- getVal inputNode
   let xs = lines input
-  let result = show . validPassphrases $ xs
+  let result = show . checker $ xs
   setHTML result outputNode
-  return ()
-
-part2 :: Fay ()
-part2 = do
   return ()
 
 anyDuplicates :: Eq a => [a] -> Bool
@@ -44,6 +40,14 @@ passphraseCheck passphrase =
 
 validPassphrases :: [String] -> Int
 validPassphrases = length . filter (== True) . map passphraseCheck
+
+passphraseCheck2 :: String -> Bool
+passphraseCheck2 passphrase =
+  let ws = map sort . words $ passphrase
+  in (length ws > 1) && (not . anyDuplicates $ ws)
+
+validPassphrases2 :: [String] -> Int
+validPassphrases2 = length . filter (== True) . map passphraseCheck2
 
 data Element
 data Event
