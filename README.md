@@ -3,6 +3,7 @@
 ## Running
 
 `runhaskell Index.hs`
+
 `fay -o docs/app.js Day4.hs`
 
 ## Dependencies
