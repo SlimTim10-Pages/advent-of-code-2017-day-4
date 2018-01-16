@@ -2,9 +2,9 @@
 
 ## Running
 
-`runhaskell Index.hs`
+`$ runhaskell Index.hs` -- Generate HTML
 
-`fay -o docs/app.js Day4.hs`
+`$ fay -o docs/app.js Day4.hs` -- Generate JavaScript
 
 ## Dependencies
 
