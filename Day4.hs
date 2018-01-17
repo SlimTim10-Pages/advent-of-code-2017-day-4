@@ -28,7 +28,6 @@ run checker = do
 
 anyDuplicates :: Eq a => [a] -> Bool
 anyDuplicates [] = False
-anyDuplicates [_] = False
 anyDuplicates (x:xs)
   | x `elem` xs = True
   | otherwise = anyDuplicates xs
