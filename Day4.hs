@@ -35,19 +35,33 @@ anyDuplicates (x:xs)
 
 passphraseCheck :: String -> Bool
 passphraseCheck passphrase =
-  let ws = words passphrase
-  in (length ws > 1) && (not . anyDuplicates $ ws)
+  case words passphrase of
+    (a:b:as) -> not . anyDuplicates $ a:b:as
+    _ -> False
 
 validPassphrases :: [String] -> Int
-validPassphrases = length . filter (== True) . map passphraseCheck
+validPassphrases [] = 0
+validPassphrases (x:xs)
+  | passphraseCheck x = 1 + validPassphrases xs
+  | otherwise = validPassphrases xs
+
+-- validPassphrases :: [String] -> Int
+-- validPassphrases = length . filter (== True) . map passphraseCheck
 
 passphraseCheck2 :: String -> Bool
 passphraseCheck2 passphrase =
-  let ws = map sort . words $ passphrase
-  in (length ws > 1) && (not . anyDuplicates $ ws)
+  case (map sort . words $ passphrase) of
+    (a:b:as) -> not . anyDuplicates $ a:b:as
+    _ -> False
 
 validPassphrases2 :: [String] -> Int
-validPassphrases2 = length . filter (== True) . map passphraseCheck2
+validPassphrases2 [] = 0
+validPassphrases2 (x:xs)
+  | passphraseCheck2 x = 1 + validPassphrases2 xs
+  | otherwise = validPassphrases2 xs
+
+-- validPassphrases2 :: [String] -> Int
+-- validPassphrases2 = length . filter (== True) . map passphraseCheck2
 
 data Element
 data Event
