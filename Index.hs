@@ -11,6 +11,7 @@ page =
     link_ [rel_ "stylesheet", type_ "text/css", href_ "style.css"]
     script_ [type_ "text/javascript", src_ "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"] ""
     script_ [type_ "text/javascript", src_ "app.js"] ""
+    script_ [type_ "text/javascript", src_ "native.js"] ""
     meta_ [httpEquiv_ "Content-Type", content_ "text/html; charset=utf-8"]
   body_ $ do
     article_ [id_ "container"] $ do
@@ -20,6 +21,7 @@ page =
       section_ [id_ "buttons"] $ do
         button_ [id_ "part1", class_ "btn"] "Run part 1"
         button_ [id_ "part2", class_ "btn"] "Run part 2"
+        button_ [id_ "part1js", class_ "btn"] "Run part 1 (native JS)"
       section_ [id_ "output-area"] $ do
         p_ [class_ "label"] "Output"
         p_ [id_ "output"] ""
