@@ -33,10 +33,10 @@ anyDuplicates (x:xs)
   | otherwise = anyDuplicates xs
 
 passphraseCheck :: String -> Bool
-passphraseCheck passphrase =
-  case words passphrase of
-    (a:b:as) -> not . anyDuplicates $ a:b:as
-    _ -> False
+passphraseCheck p
+  | length ws >= 2 = not . anyDuplicates $ ws
+  | otherwise = False
+  where ws = words p
 
 validPassphrases :: [String] -> Int
 validPassphrases [] = 0
@@ -48,10 +48,10 @@ validPassphrases (x:xs)
 -- validPassphrases = length . filter (== True) . map passphraseCheck
 
 passphraseCheck2 :: String -> Bool
-passphraseCheck2 passphrase =
-  case (map sort . words $ passphrase) of
-    (a:b:as) -> not . anyDuplicates $ a:b:as
-    _ -> False
+passphraseCheck2 p
+  | length ws >= 2 = not . anyDuplicates $ ws
+  | otherwise = False
+  where ws = map sort . words $ p
 
 validPassphrases2 :: [String] -> Int
 validPassphrases2 [] = 0
